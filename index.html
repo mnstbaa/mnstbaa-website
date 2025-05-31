@@ -11,11 +11,24 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #764ba2;
+            --secondary-color: #667eea;
+            --accent-color: #f093fb;
+            --text-dark: #333;
+            --text-light: #666;
+            --background-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-hover: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-dark);
+            background: var(--gradient);
             min-height: 100vh;
         }
 
@@ -27,9 +40,9 @@
 
         /* Header */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow);
             position: fixed;
             width: 100%;
             top: 0;
@@ -45,9 +58,12 @@
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: bold;
-            color: #764ba2;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -55,8 +71,9 @@
         }
 
         .logo::before {
-            content: "📚";
-            font-size: 1.5rem;
+            content: "📖";
+            font-size: 2rem;
+            -webkit-text-fill-color: initial;
         }
 
         .nav-links {
@@ -67,36 +84,38 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: var(--text-dark);
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
+            padding: 8px 16px;
+            border-radius: 25px;
         }
 
         .nav-links a:hover {
-            color: #764ba2;
+            background: var(--gradient);
+            color: white;
             transform: translateY(-2px);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: #764ba2;
-            transition: width 0.3s ease;
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 3px 0;
+            transition: 0.3s;
         }
 
         /* Hero Section */
         .hero {
             margin-top: 80px;
-            padding: 4rem 0;
+            padding: 6rem 0;
             text-align: center;
             color: white;
             position: relative;
@@ -110,13 +129,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: float 20s ease-in-out infinite;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.08)"/><circle cx="50" cy="10" r="0.8" fill="rgba(255,255,255,0.12)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 25s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
         }
 
         .hero-content {
@@ -125,34 +144,43 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #fff, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             animation: fadeInUp 1s ease;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
             animation: fadeInUp 1s ease 0.2s both;
         }
 
         .quote {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-style: italic;
-            margin: 2rem 0;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             animation: fadeInUp 1s ease 0.4s both;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -164,19 +192,22 @@
         main {
             background: white;
             margin: 2rem auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             overflow: hidden;
         }
 
         .section {
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            color: #764ba2;
-            margin-bottom: 2rem;
+            font-size: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 3rem;
             text-align: center;
             position: relative;
         }
@@ -184,32 +215,68 @@
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 120px;
+            height: 4px;
+            background: var(--gradient);
             border-radius: 2px;
         }
 
-        /* Featured Books */
+        /* Search Bar */
+        .search-container {
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .search-bar {
+            padding: 18px 25px 18px 50px;
+            font-size: 1.1rem;
+            border: 3px solid transparent;
+            border-radius: 35px;
+            width: 100%;
+            max-width: 600px;
+            outline: none;
+            background: linear-gradient(white, white) padding-box,
+                        var(--gradient) border-box;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .search-bar:focus {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(118, 75, 162, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-280px, -50%);
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        /* Books Grid */
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
         }
 
         .book-card {
-            background: linear-gradient(145deg, #f0f0f0, #ffffff);
-            border-radius: 15px;
-            padding: 2rem;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 25px;
+            padding: 2.5rem;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(118, 75, 162, 0.1);
         }
 
         .book-card::before {
@@ -219,8 +286,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(118, 75, 162, 0.1), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(118, 75, 162, 0.05), transparent);
+            transition: left 0.6s ease;
         }
 
         .book-card:hover::before {
@@ -228,167 +295,467 @@
         }
 
         .book-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(118, 75, 162, 0.2);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(118, 75, 162, 0.2);
         }
 
-        .book-icon {
+        .book-cover {
+            width: 120px;
+            height: 160px;
+            background: var(--gradient);
+            border-radius: 15px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
+            color: white;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .book-card:hover .book-cover {
+            transform: rotateY(15deg) scale(1.05);
         }
 
         .book-title {
-            font-size: 1.3rem;
-            color: #764ba2;
+            font-size: 1.5rem;
+            color: var(--primary-color);
             margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .book-author {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-style: italic;
         }
 
         .book-description {
-            color: #666;
-            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .book-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(118, 75, 162, 0.05);
+            border-radius: 15px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
 
         .btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: var(--gradient);
             color: white;
-            padding: 12px 30px;
+            padding: 15px 35px;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-hover);
+            transition: left 0.3s ease;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 2;
         }
 
         .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(118, 75, 162, 0.4);
+        }
+
+        /* Book Reader Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            height: 90%;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+
+        .reader-content {
+            padding: 2rem;
+            height: calc(100% - 100px);
+            overflow-y: auto;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .reader-controls {
+            position: sticky;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.3);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
         }
 
         /* Features Section */
         .features {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
         }
 
         .feature-card {
             background: white;
-            padding: 2rem;
-            border-radius: 15px;
+            padding: 3rem 2rem;
+            border-radius: 25px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(118, 75, 162, 0.03), transparent);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
 
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 2rem;
             display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
         }
 
         /* Newsletter */
         .newsletter {
-            background: #764ba2;
+            background: var(--gradient);
             color: white;
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="grad"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23grad)"/><circle cx="800" cy="400" r="150" fill="url(%23grad)"/><circle cx="400" cy="800" r="120" fill="url(%23grad)"/></svg>');
+            animation: float 30s ease-in-out infinite;
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
         .newsletter-form {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
             flex-wrap: wrap;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .newsletter input {
-            padding: 12px 20px;
+            padding: 15px 25px;
             border: none;
-            border-radius: 25px;
-            min-width: 250px;
-            font-size: 1rem;
+            border-radius: 30px;
+            min-width: 300px;
+            font-size: 1.1rem;
+            outline: none;
+            box-shadow: var(--shadow);
         }
 
         .newsletter input:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer */
         footer {
-            background: #333;
+            background: #1a1a1a;
             color: white;
-            text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.7;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
         }
 
         .social-links {
+            display: flex;
+            gap: 1rem;
             margin-top: 1rem;
         }
 
         .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 1rem;
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            color: #764ba2;
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.3);
         }
 
-        /* Responsive */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
             }
             
             .hero h1 {
                 font-size: 2.5rem;
             }
             
+            .section-title {
+                font-size: 2rem;
+            }
+            
             .newsletter-form {
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .newsletter input {
+                min-width: 250px;
+            }
+            
+            .search-icon {
+                transform: translate(-230px, -50%);
+            }
+            
+            .modal-content {
+                width: 95%;
+                height: 95%;
+                margin: 2.5% auto;
+            }
         }
 
-        /* Search Bar */
-        .search-container {
-            margin: 2rem 0;
-            text-align: center;
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
         }
 
-        .search-bar {
-            padding: 15px 25px;
-            font-size: 1.1rem;
-            border: 2px solid #764ba2;
-            border-radius: 30px;
-            width: 100%;
-            max-width: 500px;
-            outline: none;
-            transition: all 0.3s ease;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        .search-bar:focus {
-            box-shadow: 0 0 20px rgba(118, 75, 162, 0.3);
-            transform: scale(1.02);
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        .reader-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .reader-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .reader-content::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 10px;
+        }
+
+        .reader-content::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-hover);
         }
     </style>
 </head>
@@ -403,6 +770,11 @@
                     <li><a href="#about">حول المنصة</a></li>
                     <li><a href="#contact">اتصل بنا</a></li>
                 </ul>
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </nav>
         </div>
     </header>
@@ -424,171 +796,90 @@
             <h2 class="section-title">مكتبة الإبداعات</h2>
             
             <div class="search-container">
-                <input type="text" class="search-bar" placeholder="ابحث في مكتبة الكتب..." id="searchBooks">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-bar" placeholder="ابحث في مكتبة الكتب والمؤلفات..." id="searchBooks">
             </div>
 
             <div class="books-grid">
-                <div class="book-card">
-                    <span class="book-icon">📖</span>
-                    <h3 class="book-title">ديوان الشعر الحديث</h3>
-                    <p class="book-description">مجموعة من أجمل القصائد الحديثة التي تلامس الروح وتحرك المشاعر</p>
-                    <a href="#" class="btn">اقرأ الآن</a>
+                <div class="book-card fade-in" data-book="book1">
+                    <div class="book-cover">📚</div>
+                    <h3 class="book-title">حروف من القلب</h3>
+                    <p class="book-author">من تأليف منصة باء</p>
+                    <p class="book-description">مجموعة من النصوص والخواطر العميقة التي تلامس القلب وتحرك المشاعر الإنسانية الصادقة</p>
+                    <div class="book-stats">
+                        <div class="stat">
+                            <div class="stat-number">45</div>
+                            <div class="stat-label">صفحة</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">فصل</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">2024</div>
+                            <div class="stat-label">سنة النشر</div>
+                        </div>
+                    </div>
+                    <button class="btn read-btn" data-book="book1">
+                        <span>اقرأ الآن</span>
+                    </button>
                 </div>
                 
-                <div class="book-card">
-                    <span class="book-icon">📚</span>
-                    <h3 class="book-title">قصص من الحياة</h3>
-                    <p class="book-description">مجموعة قصص قصيرة تحكي عن تجارب إنسانية مؤثرة ومعبرة</p>
-                    <a href="#" class="btn">اقرأ الآن</a>
+                <div class="book-card fade-in" data-book="book2">
+                    <div class="book-cover">✍️</div>
+                    <h3 class="book-title">خواطر في زمن الصمت</h3>
+                    <p class="book-author">من تأليف منصة باء</p>
+                    <p class="book-description">نصوص تأملية تأخذك في رحلة عميقة مع النفس، تستكشف معاني الحياة والحب والأمل</p>
+                    <div class="book-stats">
+                        <div class="stat">
+                            <div class="stat-number">38</div>
+                            <div class="stat-label">صفحة</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">خاطرة</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">2024</div>
+                            <div class="stat-label">سنة النشر</div>
+                        </div>
+                    </div>
+                    <button class="btn read-btn" data-book="book2">
+                        <span>اقرأ الآن</span>
+                    </button>
                 </div>
                 
-                <div class="book-card">
-                    <span class="book-icon">✍️</span>
-                    <h3 class="book-title">خواطر وتأملات</h3>
-                    <p class="book-description">نصوص نثرية تأملية تأخذك في رحلة عميقة مع النفس والحياة</p>
-                    <a href="#" class="btn">اقرأ الآن</a>
+                <div class="book-card fade-in" data-book="book3">
+                    <div class="book-cover">🌟</div>
+                    <h3 class="book-title">أشعار من الروح</h3>
+                    <p class="book-author">من تأليف منصة باء</p>
+                    <p class="book-description">ديوان شعري يحتوي على أجمل القصائد التي تعبر عن جمال اللغة العربية وعمق الإحساس</p>
+                    <div class="book-stats">
+                        <div class="stat">
+                            <div class="stat-number">62</div>
+                            <div class="stat-label">صفحة</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">25</div>
+                            <div class="stat-label">قصيدة</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">2024</div>
+                            <div class="stat-label">سنة النشر</div>
+                        </div>
+                    </div>
+                    <button class="btn read-btn" data-book="book3">
+                        <span>اقرأ الآن</span>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <section class="features">
+        <section class="features" id="about">
             <div class="container">
                 <h2 class="section-title">مميزات المنصة</h2>
                 <div class="features-grid">
-                    <div class="feature-card">
+                    <div class="feature-card fade-in">
                         <span class="feature-icon">🎨</span>
-                        <h3>إبداع أصيل</h3>
-                        <p>جميع المحتوى مكتوب بعناية وشغف من قبل كتاب وشعراء موهوبين</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <span class="feature-icon">📱</span>
-                        <h3>سهولة الوصول</h3>
-                        <p>اقرأ كتبك المفضلة في أي وقت ومن أي مكان بتصميم متجاوب</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <span class="feature-icon">💫</span>
-                        <h3>تحديث مستمر</h3>
-                        <p>محتوى جديد يضاف بانتظام لإثراء تجربتك الأدبية</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="newsletter">
-            <div class="container">
-                <h2>ابق على تواصل معنا</h2>
-                <p>اشترك في نشرتنا البريدية لتصلك آخر الإصدارات والأخبار الأدبية</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="أدخل بريدك الإلكتروني">
-                    <button type="submit" class="btn">اشترك الآن</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 منصة باء - جميع الحقوق محفوظة</p>
-            <div class="social-links">
-                <a href="#" title="فيسبوك">📘</a>
-                <a href="#" title="تويتر">🐦</a>
-                <a href="#" title="إنستغرام">📷</a>
-                <a href="#" title="يوتيوب">📺</a>
-            </div>
-            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-                "هذه بدايتنا ولن نتوقف في عتبة الطريق"
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Header background change on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-
-        // Search functionality
-        document.getElementById('searchBooks').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const bookCards = document.querySelectorAll('.book-card');
-            
-            bookCards.forEach(card => {
-                const title = card.querySelector('.book-title').textContent.toLowerCase();
-                const description = card.querySelector('.book-description').textContent.toLowerCase();
-                
-                if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeInUp 0.5s ease';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Newsletter form submission
-        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            if (email) {
-                alert('شكراً لك! تم تسجيل اشتراكك بنجاح.');
-                this.querySelector('input[type="email"]').value = '';
-            }
-        });
-
-        // Book card hover effects
-        document.querySelectorAll('.book-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.book-card, .feature-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html>
+                        <h3 class="feature-title">إبداع أصيل</h3>
+                        <p class=
